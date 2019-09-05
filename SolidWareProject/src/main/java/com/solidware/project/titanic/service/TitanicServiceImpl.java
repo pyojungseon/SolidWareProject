@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
+import com.solidware.project.titanic.common.TitanicConstants;
 import com.solidware.project.titanic.vo.TitanicMember;
 
 import io.solidware.predfun.Model;
@@ -52,12 +53,12 @@ public class TitanicServiceImpl implements TitanicService{
 		
 		System.out.println(servletContext.getRealPath("/"));
 		
-		ClassPathResource resource = new ClassPathResource("model/titanic.dlm");
+		ClassPathResource resource = new ClassPathResource(TitanicConstants.DLM_PATH);
 		
 		
-		InputStream is = new FileInputStream(resource.getFile());
+		InputStream fis = new FileInputStream(resource.getFile());
 		
-		Model model = ModelFactory.loadModel("titanic.dlm", is);
+		Model model = ModelFactory.loadModel(TitanicConstants.DLM_FILE_NAME, fis);
 		Map<String, Object> prediction = model.predict(hm);
 		
 		System.out.println(prediction.toString());
