@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solidware.project.person.dao.PersonDao">
+
+	<select id="getAllPerson" resultType="com.solidware.project.person.vo.Person">
+	SELECT name FROM PERSONTABLE
+	</select>
+	
+	<insert id="addPerson">
+	INSERT INTO PERSONTABLE(name) values(#{name})
+	</insert>
+
+	<delete id="deletePerson">
+	DELETE FROM PERSONTABLE WHERE name=#{personName}
+	</delete>
+
+</mapper>
