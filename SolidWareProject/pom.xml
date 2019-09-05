@@ -179,7 +179,7 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
-		<!-- prediction function library -->
+		<!-- prediction function library 
 		<dependency>
 			<groupId>io.solidware.predfun</groupId>
 			<artifactId>predfun-1.19</artifactId>
@@ -187,6 +187,7 @@
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/predfun-1.19.jar</systemPath>
 		</dependency>
+		-->
 	</dependencies>
     <build>
         <plugins>
