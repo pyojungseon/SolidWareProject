@@ -1,6 +1,10 @@
 package com.solidware.project.titanic.dao;
 
-public class TitanicDao {
+import com.solidware.project.titanic.vo.TitanicMember;
 
-	
+public interface TitanicDao {
+
+	public int getNextSeqNumber();
+	public boolean addMember(TitanicMember member);
+	public boolean updateSurvived(TitanicMember member);
 }

@@ -39,15 +39,16 @@ public class TitanicController {
 		TitanicMember member = new TitanicMember();
 		
 		member.setSex(request.getParameter("Sex"));
-		member.setPclass(request.getParameter("Pclass"));
-		member.setFare(request.getParameter("Fare"));
+		member.setPclass(Integer.valueOf(request.getParameter("Pclass")));
+		member.setFare(Float.valueOf(request.getParameter("Fare")));
 		member.setEmbarked(request.getParameter("Embarked"));
-		member.setParch(request.getParameter("Parch"));
-		member.setAge(request.getParameter("Age"));
+		member.setParch(Integer.valueOf(request.getParameter("Parch")));
+		member.setAge(Integer.valueOf(request.getParameter("Age")));
 		member.setCabin(request.getParameter("Cabin"));
 		member.setName(request.getParameter("Name"));
 		member.setPassengerId(request.getParameter("PassengerId"));
-		member.setSibSp(request.getParameter("SibSp"));
+		member.setSibSp(Integer.valueOf(request.getParameter("SibSp")));
+		
 		try {
 			double percent = (double)titanicService.getLivePercentExpectation(member).get("Survived");
 			System.out.println("percent : "+ percent*100);

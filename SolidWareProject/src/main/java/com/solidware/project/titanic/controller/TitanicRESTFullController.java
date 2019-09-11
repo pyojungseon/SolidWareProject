@@ -1,6 +1,5 @@
 package com.solidware.project.titanic.controller;
 
-import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,23 +30,14 @@ public class TitanicRESTFullController {
 	@RequestMapping(value = "/titanic/restful", method = RequestMethod.POST)
 	public Map<String, Object> getLivePercent(Model model, HttpServletRequest request) {
 		logger.info("TitanicRESTFullController : Post Method");
-		TitanicMember member = new TitanicMember();
+		
 		Map<String, Object> expectation = null;
 		
-		member.setSex(request.getParameter("Sex"));
-		member.setPclass(request.getParameter("Pclass"));
-		member.setFare(request.getParameter("Fare"));
-		member.setEmbarked(request.getParameter("Embarked"));
-		member.setParch(request.getParameter("Parch"));
-		member.setAge(request.getParameter("Age"));
-		member.setCabin(request.getParameter("Cabin"));
-		member.setName(request.getParameter("Name"));
-		member.setPassengerId(request.getParameter("PassengerId"));
-		member.setSibSp(request.getParameter("SibSp"));
 		try {
+			TitanicMember member = titanicService.getTitanicMember(request);
 			expectation = titanicService.getLivePercentExpectation(member);
 			System.out.println("expectation value : "+ expectation.toString());
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
