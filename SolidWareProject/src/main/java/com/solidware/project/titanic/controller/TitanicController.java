@@ -1,6 +1,8 @@
 package com.solidware.project.titanic.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,7 +50,10 @@ public class TitanicController {
 		member.setName(request.getParameter("Name"));
 		member.setPassengerId(request.getParameter("PassengerId"));
 		member.setSibSp(Integer.valueOf(request.getParameter("SibSp")));
-		
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
+		Date time = new Date();
+		member.setRgsDt(format1.format(time));
+		member.setSurvived(2);
 		try {
 			double percent = (double)titanicService.getLivePercentExpectation(member).get("Survived");
 			System.out.println("percent : "+ percent*100);
@@ -57,6 +62,7 @@ public class TitanicController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		titanicService.addMember(member);
 		
 		return "livePercent";
 	}

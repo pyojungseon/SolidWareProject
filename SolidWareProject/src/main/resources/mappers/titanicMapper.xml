@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solidware.project.titanic.dao.TitanicDao">
+
+	<select id="getNextSeqNumber" resultType="_int">
+	SELECT MAX(SEQ)+1 as SEQ FROM TITANIC
+	</select>
+	
+	<insert id="addMember">
+	INSERT INTO TITANIC(NAME, SEX, PCLASS, FARE, EMBARKED, PARCH, AGE, CABIN, SIBSP, SURVIVED, RGSDT)
+	 values(#{name}, #{sex}, #{pclass}, #{fare}, #{embarked}, #{parch}, #{age}, #{cabin}, #{sibSp}, #{survived}, #{rgsDt})
+	</insert>
+
+	<delete id="updateSurvived">
+	UPDATE TITANIC SET(SURVIVED=#{survived}) where NAME=#{name} and SEQ=#{seq}
+	</delete>
+
+</mapper>

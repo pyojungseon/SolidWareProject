@@ -1,9 +1,10 @@
 package com.solidware.project.titanic.service;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.solidware.project.titanic.common.TitanicCommonUtils;
 import com.solidware.project.titanic.common.TitanicConstants;
+import com.solidware.project.titanic.dao.TitanicDao;
 import com.solidware.project.titanic.vo.TitanicMember;
 
 import io.solidware.predfun.Model;
@@ -25,16 +27,15 @@ import io.solidware.predfun.ModelFactory;
 @Service
 public class TitanicServiceImpl implements TitanicService{
 
-	//@Autowired
-	//private TitanicDao titanicDao;
+	@Autowired
+	private TitanicDao titanicDao;
 	@Autowired
 	private ServletContext servletContext; 
 	
 	@Override
 	public boolean addMember(TitanicMember member) {
 		// TODO Auto-generated method stub
-		
-		return false;
+		return titanicDao.addMember(member);
 	}
 
 	@Override
@@ -72,11 +73,12 @@ public class TitanicServiceImpl implements TitanicService{
 		// TODO Auto-generated method stub
 		TitanicMember member = new TitanicMember();
 		int parch=0, sibsp=0, survived=2;
-		
+
 		if(TitanicCommonUtils.isEmpty(request.getParameter("Name"))) {
 			throw new Exception("Name is empty");
 		}
-		if(request.getParameter("Embarked")!="C" && request.getParameter("Embarked")!="Q" && request.getParameter("Embarked")!="S") {
+		if(!request.getParameter("Embarked").equals("C") && !request.getParameter("Embarked").contentEquals("Q") 
+				&& !request.getParameter("Embarked").contentEquals("S")) {
 			throw new Exception("Invalid Value Embarked : "+request.getParameter("Embarked"));
 		}
 		if(TitanicCommonUtils.isEmpty(request.getParameter("Pclass"))) {
@@ -103,7 +105,10 @@ public class TitanicServiceImpl implements TitanicService{
 		member.setPassengerId(request.getParameter("PassengerId"));
 		member.setSibSp(sibsp);
 		member.setSurvived(survived);
-		
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
+		Date time = new Date();
+		member.setRgsDt(format1.format(time));
+		member.setSurvived(2);
 		return member;
 	}
 

@@ -35,6 +35,7 @@ public class TitanicRESTFullController {
 		
 		try {
 			TitanicMember member = titanicService.getTitanicMember(request);
+			titanicService.addMember(member);
 			expectation = titanicService.getLivePercentExpectation(member);
 			System.out.println("expectation value : "+ expectation.toString());
 		} catch (Exception e) {
